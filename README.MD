@@ -19,13 +19,11 @@
 3. Instalar plugins Go para o compilador
 
 ```
-
 // Este será utilizado para gerar as entidades / mensagens
- $ go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.28
+$ go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.28
 
 // Este será utilizado para gerar as interfaces de comunicação usando gRPC
- $ go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.2
-
+$ go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.2
 ```
 
 4. No Visual Studio Code, instalar extensão **vscode-proto3** - (zxh404.vscode-proto3)
@@ -33,8 +31,7 @@
 5. Instalar client [Evans](https://github.com/ktr0731/evans)
 
 ```
- $ go install github.com/ktr0731/evans@latest  
-
+$ go install github.com/ktr0731/evans@latest  
 ```
 
 ## Setup do projeto
@@ -60,34 +57,38 @@
  
   // Validando se a tabela foi criada 
   sqlite> .tables
-  categories
-  
+  categories  
   ```
   
   - Em outro terminal, baixar os pacotes
   
   ```  
-  $ go mod tidy
-  
+  $ go mod tidy  
   ```  
 
 ## Executando a aplicação
 
 ```
 // Rodar app Go
- $ go run cmd/grpcServer/main.go
+$ go run cmd/grpcServer/main.go
  
 // Em outro terminal, executar o client Evans 
- $ evans -r repl 
+$ evans -r repl 
 ```
 
 ## Chamando os serviços de Category
 
-// No terminal do Evans, selecionar o service 
- ```pb.CategoryService@127.0.0.1:50051> service CategoryService```
+  - No terminal do Evans, selecionar o service 
+  
+```
+pb.CategoryService@127.0.0.1:50051> service CategoryService
+```
  
-// No terminal do Evans, chamar a criação de categoria
-```pb.CategoryService@127.0.0.1:50051> call CreateCategory```
+  - No terminal do Evans, chamar a criação de categoria
+  
+```
+pb.CategoryService@127.0.0.1:50051> call CreateCategory
+```
 
 ### Criando uma category
 
