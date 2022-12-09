@@ -31,69 +31,66 @@ $ go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.2
 5. Instalar client [Evans](https://github.com/ktr0731/evans)
 
 ```
-$ go install github.com/ktr0731/evans@latest  
+$ go install github.com/ktr0731/evans@latest
 ```
 
 ## Setup do projeto
 
-  - Inicializando
-  
-  ```  
-  $ go mod init github.com/marciafc/grpc-go
-  $ go mod tidy
-  ``` 
+- Inicializando
 
-  - Geração de código na pasta 'pb'
-  
-  ```    
-  $ protoc --go_out=. --go-grpc_out=. proto/course_category.proto
-  ```  
+```
+$ go mod init github.com/marciafc/grpc-go
+$ go mod tidy
+```
 
-  - Criar tabela no sqlite
-  
-  ```  
-  $ sqlite3 db.sqlite
-  sqlite> create table categories (id string, name string, description string);
- 
-  // Validando se a tabela foi criada 
-  sqlite> .tables
-  categories  
-  ```
-  
-  - Em outro terminal, baixar os pacotes
-  
-  ```  
-  $ go mod tidy  
-  ```  
+- Geração de código na pasta 'pb'
+
+```
+$ protoc --go_out=. --go-grpc_out=. proto/course_category.proto
+```
+
+- Criar tabela no sqlite
+
+```
+$ sqlite3 db.sqlite
+sqlite> create table categories (id string, name string, description string);
+
+// Validando se a tabela foi criada
+sqlite> .tables
+categories
+```
+
+- Em outro terminal, baixar os pacotes
+
+```
+$ go mod tidy
+```
 
 ## Executando a aplicação
 
 ```
 // Rodar app Go
 $ go run cmd/grpcServer/main.go
- 
-// Em outro terminal, executar o client Evans 
-$ evans -r repl 
+
+// Em outro terminal, executar o client Evans
+$ evans -r repl
 ```
 
 ## Chamando os serviços de Category
 
-  - No terminal do Evans, selecionar o service 
-  
+- No terminal do Evans, selecionar o service
+
 ```
 pb.CategoryService@127.0.0.1:50051> service CategoryService
-```
- 
-  - No terminal do Evans, chamar a criação de categoria
-  
-```
-pb.CategoryService@127.0.0.1:50051> call CreateCategory
 ```
 
 ### Criando uma category
 
 ```
-// No terminal do Evans, informar o name e a category 
+// No terminal do Evans, chamar a criação de categoria
+pb.CategoryService@127.0.0.1:50051> call CreateCategory
+
+// Informar o name e a category
 name (TYPE_STRING) => Categoria1
 description (TYPE_STRING) => Descrição1
 
@@ -104,7 +101,7 @@ description (TYPE_STRING) => Descrição1
   "name": "Categoria1"
 }
 ```
- 
+
 ### Listar todas as categorias
 
 ```
@@ -142,7 +139,7 @@ id (TYPE_STRING) => 75182f19-4bd3-48b9-8b55-06104d865578
 
 ### Criar várias categories - usando stream
 
-  - Irá receber várias requisições para salvar e irá retornar tudo ao término
+- Irá receber várias requisições para salvar e irá retornar tudo ao término
 
 ```
 // No terminal do Evans, chamar a criação de categorias por stream
@@ -161,7 +158,7 @@ name (TYPE_STRING) => Categoria 3 stream
 description (TYPE_STRING) => Desc 3
 
 // Para parar de enviar: control + D
-name (TYPE_STRING) => 
+name (TYPE_STRING) =>
 
 // O retorno será similar a este formato - com todas as categorias de uma só vez
 {
@@ -187,7 +184,7 @@ name (TYPE_STRING) =>
 
 ### Criar várias categories - usando stream bidirecionais
 
-  - Irá receber as requisições para salvar e irá retornar logo em seguida (a cada requisição)
+- Irá receber as requisições para salvar e irá retornar logo em seguida (a cada requisição)
 
 ```
 // No terminal do Evans, chamar a criação de categorias por stream bidirecional
