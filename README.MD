@@ -78,22 +78,19 @@ $ evans -r repl
 
 ## Chamando os serviços de Category
 
-  - No terminal do Evans, selecionar o service 
-  
+- No terminal do Evans, selecionar o service
+
 ```
 pb.CategoryService@127.0.0.1:50051> service CategoryService
-```
- 
-  - No terminal do Evans, chamar a criação de categoria
-  
-```
-pb.CategoryService@127.0.0.1:50051> call CreateCategory
 ```
 
 ### Criando uma category
 
 ```
-// No terminal do Evans, informar o name e a category 
+// No terminal do Evans, chamar a criação de categoria
+pb.CategoryService@127.0.0.1:50051> call CreateCategory
+
+// Informar o name e a category
 name (TYPE_STRING) => Categoria1
 description (TYPE_STRING) => Descrição1
 
